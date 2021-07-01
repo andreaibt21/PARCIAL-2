@@ -79,22 +79,25 @@ int mostrarMenu(int *respuesta) {
 	int auxRespuesta;
 	printf(" \n ____________________________________MENÚ___________________________________________");
 	printf( "\n |                                                                                 |"
-			"\n |   1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).  |"
-			"\n |   2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).|"
-			"\n |   3. Alta de empleado                                                           |"
-			"\n |   4. Modificar datos de empleado                                                |"
-			"\n |   5. Baja de empleado                                                           |"
-			"\n |   6. Listar empleados                                                           |"
-			"\n |   7. Ordenar empleados                                                          |"
-			"\n |   8. Guardar los datos de los empleados en el archivo data.csv (modo texto).    |"
-			"\n |   9. Guardar los datos de los empleados en el archivo data.csv (modo binario).  |"
-			"\n |  10. SALIR                                                                      |"
+			"\n |   1. Cargar los datos de los libros desde el archivo Datos.csv (modo texto).    |"
+			"\n |   2. Ordenar libros                                                             |"
+			"\n |   3. Listar libros                                                              |"
+			"\n |   4. Generar descuento                                                          |"
+			"\n |   5. Guardar los datos de los libros en el mapeado.csv (modo texto).            |"
+			"\n |   6. Alta de libro                                                              |"
+			"\n |   7. Modificar datos de un libro                                                |"
+			"\n |   8. Baja de libro                                                              |"
+			"\n |   9. Cargar los datos de los libros desde el archivo data.csv (modo binario).   |"
+			"\n |  10. Guardar los datos de los libros en el archivo data.csv (modo binario).     |"
+			"\n |  11. cantidad libros planeta                                                    |"
+			"\n |  12. filtrar los librors de editorial planeta                                   |"
+			"\n |  12. SALIR                                                                      |"
 			"\n |_________________________________________________________________________________|\n"
 
 			);
 
 
-	utn_getNumero(&auxRespuesta, "\n  Ingrese una opcion    ","\nError, ingrese una opcion del 1 al 10 \n\n", 1, 10,3);
+	utn_getNumero(&auxRespuesta, "\n  Ingrese una opcion    ","\nError, ingrese una opcion del 1 al 13 \n\n", 1, 13,3);
 	*respuesta = auxRespuesta;
 
 	return 0;

@@ -10,7 +10,7 @@ static int addNode(LinkedList *this, int nodeIndex, void *pElement);
  *
  *  \param void
  *  \return LinkedList* Retorna (NULL) en el caso de no conseguir espacio en memoria
- *                      o el puntero al espacio reservado
+ *        o el puntero al espacio reservado
  */
 LinkedList* ll_newLinkedList(void) {
 	LinkedList *this;
@@ -529,7 +529,7 @@ LinkedList* ll_map(LinkedList* this,void(*funcion)(void* element))
 
 	if(this != NULL && funcion != NULL)
 	{
-		printf("Entró al map");
+
 		for(int i = 0; i < ll_len(this); i++)
 		{
 			auxiliar = ll_get(this, i);
@@ -541,25 +541,47 @@ LinkedList* ll_map(LinkedList* this,void(*funcion)(void* element))
 }
 
 
-int ll_count(LinkedList* this,void(*funcion)(void* element)){
+int ll_count(LinkedList* this,int(*funcion)(void* element)){
 	int retorno = 0;
-	//void* auxiliar = NULL;
+	void* auxiliar = NULL;
+	int cantidad;
 
 		if(this != NULL && funcion != NULL)
 		{
 
 			for(int i = 0; i < ll_len(this); i++)
 			{
-			//	auxiliar = ll_get(this, i);
-			//	retorno = retorno + funcion(auxiliar);
+				auxiliar = ll_get(this, i);
+				if (auxiliar != NULL){
+					cantidad = funcion(auxiliar);
+					retorno += cantidad;
+				}
 			}
 
 		}
 		return retorno;
+}
+LinkedList* ll_filter(LinkedList* this,int(*funcion)(void* element))
+{
+	void* auxiliar = NULL;
+	LinkedList* LinkedListNueva = NULL;
 
-
-
-
+	if(this != NULL && funcion != NULL)
+	{
+		LinkedListNueva = ll_newLinkedList();
+		if (LinkedListNueva != NULL)
+		{
+			for(int i = 0; i < ll_len(this); i++)
+			{
+				auxiliar = ll_get(this, i);
+				if( auxiliar != NULL && funcion(auxiliar) == 0)
+				{
+					ll_add( LinkedListNueva,auxiliar );
+				}
+			}
+		}
+	}
+	return LinkedListNueva;
 }
 
-//cantidad de entradas de una sala
+

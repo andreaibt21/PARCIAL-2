@@ -4,56 +4,54 @@
 #include "parser.h"
 
 #include "Libro.h"
-/** \brief Parsea los datos los datos de los empleados desde el archivo data.csv (modo texto).
+/** \brief Parsea los datos los datos de los libros desde el archivo data.csv (modo texto).
  *
  * \param path char*
- * \param pointerArrayListEmployee LinkedList*
+ * \param pointerArrayListLibro LinkedList*
  * \return int
  *
  */
-int parser_EmployeeFromText(FILE* pointerFile , LinkedList* pointerArrayListLibro){
+int parser_LibroFromText(FILE* pointerFile , LinkedList* pointerArrayListLibro){
 	int retorno = -1;
-	char buffer[5][300];
+	char buffer[5][150];
+	int cantidadLeida;
+	Libro* pointerAuxLibro = NULL;
 
-	Libro* pointerAuxEmpleado = NULL;
-	printf("\n Entró al parser");
-	//	int id;    char titulo[300];    char autor[300];    int precio;    int editorialId;
-	printf("\n pointerFile %p   pointerArrayListLibro  %p ", pointerFile, pointerArrayListLibro);
 	if(pointerFile != NULL && pointerArrayListLibro != NULL){
 
-		fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^,],%[^\n]\n", *(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3),*(buffer+4));
-		printf( "\n%s,  %s,  %s,  %s,  %s,    ", *(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3),*(buffer+4));
+		cantidadLeida = fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^,],%[^\n]\n", *(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3),*(buffer+4));
+		if(cantidadLeida<5){
+			retorno = -1;
+		}else{
+			while( !feof(pointerFile) )
+			{
+				fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^,],%[^\n]\n", *(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3),*(buffer+4));
 
-	while( !feof(pointerFile) ){
-		fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^,],%[^\n]\n", *(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3),*(buffer+4));
-		printf( "\n%s,  %s,  %s,  %s,  %s,    ", *(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3),*(buffer+4));
-		pointerAuxEmpleado = libro_newParametros(*(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3),*(buffer+4));
-
-
-		if(pointerAuxEmpleado != NULL)
-		{
-			ll_add(pointerArrayListLibro,pointerAuxEmpleado);
-			retorno=0;
+				pointerAuxLibro = libro_newParametros(*(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3),*(buffer+4));
+				if(pointerAuxLibro != NULL)
+				{
+					ll_add(pointerArrayListLibro,pointerAuxLibro);
+					retorno=0;
+				}
+			}
 		}
 
-
-	}
 
 	}
   	 return retorno;
 }
 
-/** \brief Parsea los datos los datos de los empleados desde el archivo data.csv (modo binario).
+/** \brief Parsea los datos los datos de los libros desde el archivo data.csv (modo binario).
  *
  * \param path char*
- * \param pointerArrayListEmployee LinkedList*
+ * \param pointerArrayListLibro LinkedList*
  * \return int
  *
  */
-int parser_EmployeeFromBinary(FILE* pointerFile , LinkedList* pointerArrayListLibro)
+int parser_LibroFromBinary(FILE* pointerFile , LinkedList* pointerArrayListLibro)
 {	int retorno;
 	int retornoLeido;
-	Libro* pointerAuxEmpleado=NULL;
+	Libro* pointerAuxLibro=NULL;
 	Libro auxiliarEmployee;
 
 		if(pointerFile!=NULL && pointerArrayListLibro!=NULL){
@@ -61,20 +59,20 @@ int parser_EmployeeFromBinary(FILE* pointerFile , LinkedList* pointerArrayListLi
 			while( !feof(pointerFile) ){
 
 				retornoLeido = fread(&auxiliarEmployee,sizeof(Libro),1,pointerFile);
-				pointerAuxEmpleado = movie_new();
-				if (pointerAuxEmpleado != NULL ) {
+				pointerAuxLibro = libro_new();
+				if (pointerAuxLibro != NULL ) {
 
 					if(retornoLeido != 0){
 
-						if(  (movie_setId(pointerAuxEmpleado, auxiliarEmployee.id)   == 0) &&
-							(movie_setTitulo(pointerAuxEmpleado, auxiliarEmployee.titulo)  == 0) &&
-							(movie_setAutor(pointerAuxEmpleado, auxiliarEmployee.autor) == 0) &&
-							(movie_setPrecio(pointerAuxEmpleado, auxiliarEmployee.precio) == 0) &&
-							(movie_setEditorialId(pointerAuxEmpleado, auxiliarEmployee.editorialId) == 0)
+						if(  (libro_setId(pointerAuxLibro, auxiliarEmployee.id)   == 0) &&
+							(libro_setTitulo(pointerAuxLibro, auxiliarEmployee.titulo)  == 0) &&
+							(libro_setAutor(pointerAuxLibro, auxiliarEmployee.autor) == 0) &&
+							(libro_setPrecio(pointerAuxLibro, auxiliarEmployee.precio) == 0) &&
+							(libro_setEditorialId(pointerAuxLibro, auxiliarEmployee.editorialId) == 0)
 							)
 						{
 
-							ll_add(pointerArrayListLibro, pointerAuxEmpleado);
+							ll_add(pointerArrayListLibro, pointerAuxLibro);
 							retorno = 0;
 						}
 					}

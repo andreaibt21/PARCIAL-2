@@ -31,7 +31,7 @@ struct LinkedList
 }typedef LinkedList;
 #endif
 
-//Publicas
+
 LinkedList* ll_newLinkedList(void);
 int ll_len(LinkedList* this);
 Node* test_getNode(LinkedList* this, int nodeIndex);
@@ -52,4 +52,5 @@ LinkedList* ll_subList(LinkedList* this,int from,int to);
 LinkedList* ll_clone(LinkedList* this);
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);
 LinkedList* ll_map(LinkedList* this,void(*funcion)(void* element));
-int ll_count(LinkedList* this,void(*funcion)(void* element));
+int ll_count(LinkedList* this,int(*funcion)(void* element));
+LinkedList* ll_filter(LinkedList* this,int(*funcion)(void* element));

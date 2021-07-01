@@ -10,35 +10,35 @@
 #include "utn.h"
 
 
-int controller_addMovie(LinkedList* pointerArrayListMovies){
+int controller_addLibro(LinkedList* pointerArrayListMovies){
 
 	int retorno = -1;
     Libro *peliculaAuxiliar = NULL;
     int  auxiliarId = 0;
 	int idMaximo;
-	char auxiliarNombre[200];
-	char auxiliarHorasTrabajadas[20];
-	int auxiliarSala;
-	int cantidadEmployees;
-	int auxiliarCantidad_entradas;
+	char auxiliarTitulo[150];
+	char auxiliarAutor[150];
+	int auxiliarPrecio;
+	int cantidadLibros;
+	int auxiliarEditorialId;
 
     		if (pointerArrayListMovies != NULL){
 
-    			printf("is empty de ll ?  %d",ll_isEmpty(pointerArrayListMovies));
-    				printf("\n    ---------------- Alta de un empleado nuevo ------------- \n");
-    				if (  (utn_getString(auxiliarNombre,"\n Ingrese el nombre  ", "\n Error intente nuevamente  ", 3) == 0) &&
-					      (utn_getString(auxiliarHorasTrabajadas,"\n Ingrese las horas trabajadas (Entre 0 y 500) ", "\n Error, intente nuevamente",3) == 0) &&
-					      (utn_getNumero(&auxiliarSala,"\n Ingrese el sueldo (Entre 1 y 90000) ", "\n Error, intente nuevamente", 1, 90000,3) == 0) &&
-					      (utn_getNumero(&auxiliarCantidad_entradas,"\n Ingrese el sueldo (Entre 1 y 90000) ", "\n Error, intente nuevamente", 1, 90000,3) == 0)
+
+    				printf("\n    ---------------- Alta de un libro nuevo ------------- \n");
+    				if (  (utn_getString(auxiliarTitulo,"\n Ingrese el titulo  ", "\n Error intente nuevamente  ", 3) == 0) &&
+					      (utn_getString(auxiliarAutor,"\n Ingrese el autor ", "\n Error, intente nuevamente",3) == 0) &&
+					      (utn_getNumero(&auxiliarPrecio,"\n Ingrese el precio (Entre 1 y 90000) ", "\n Error, intente nuevamente", 1, 90000,3) == 0) &&
+					      (utn_getNumero(&auxiliarEditorialId,"\n Ingrese el id de la editorial: \n1 - PLANETA \n2 - SIGLO XXI EDITORES \n3 - PEARSON\n4 - MINOTAURO\n5 - SALAMANDRA \n6 - PENGUIN BOOKS                ", "\n Error, intente nuevamente", 1, 6,3) == 0)
 				       ){
     					if( ll_isEmpty(pointerArrayListMovies) == 0){
 
-    						cantidadEmployees = ll_len(pointerArrayListMovies);
+    						cantidadLibros = ll_len(pointerArrayListMovies);
 
-							for(int i=0; i<cantidadEmployees ; i++){
+							for(int i=0; i<cantidadLibros ; i++){
 
 								peliculaAuxiliar =ll_get(pointerArrayListMovies, i);
-								movie_getId(peliculaAuxiliar, &idMaximo);
+								libro_getId(peliculaAuxiliar, &idMaximo);
 
 								if(  auxiliarId>idMaximo ){
 									idMaximo = auxiliarId;
@@ -48,21 +48,21 @@ int controller_addMovie(LinkedList* pointerArrayListMovies){
     					printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
     					idMaximo++;
     				    printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
-    					peliculaAuxiliar = movie_new();
+    					peliculaAuxiliar = libro_new();
 
-    					if(   (movie_setId(peliculaAuxiliar, idMaximo) == 0) &&
-  							  (movie_setTitulo(peliculaAuxiliar, auxiliarNombre) == 0) &&
-							  (movie_setAutor(peliculaAuxiliar, auxiliarHorasTrabajadas) == 0) &&
-							  (movie_setPrecio(peliculaAuxiliar, auxiliarSala) == 0) &&
-							  (movie_setEditorialId(peliculaAuxiliar, auxiliarCantidad_entradas) == 0)
+    					if(   (libro_setId(peliculaAuxiliar, idMaximo) == 0) &&
+  							  (libro_setTitulo(peliculaAuxiliar, auxiliarTitulo) == 0) &&
+							  (libro_setAutor(peliculaAuxiliar, auxiliarAutor) == 0) &&
+							  (libro_setPrecio(peliculaAuxiliar, auxiliarPrecio) == 0) &&
+							  (libro_setEditorialId(peliculaAuxiliar, auxiliarEditorialId) == 0)
 
     					){
     						ll_add(pointerArrayListMovies, peliculaAuxiliar);
-							printf("\nEl empleado cargado es: \n");
-							movie_printfOne(peliculaAuxiliar);
+							printf("\nEl libro cargado es: \n");
+							libro_printfOne(peliculaAuxiliar);
 							retorno=0;
     					}else{
-    						printf("\nHubo un error al cargar el empleado \n");
+    						printf("\nHubo un error al cargar el libro \n");
 
     					};
     				};
@@ -71,28 +71,28 @@ int controller_addMovie(LinkedList* pointerArrayListMovies){
 }
 
 
-int controller_editMovie(LinkedList* pointerArrayListMovies)
+int controller_editLibro(LinkedList* pointerArrayListMovies)
 {
 
 	int retorno = -1;
 	Libro *peliculaAuxiliar = NULL;
-	char auxiliarNombre[200];
-	char auxiliarHorasTrabajadas[20];
-	int auxiliarSueldo;
+	char auxiliarTitulo[150];
+	char auxiliarAutor[150];
+	int auxiliarPrecio;
 	int datoACambiar;
-	int idEmployeeACambiar;
-	int cantidadEmployees;
+	int idLibroACambiar;
+	int cantidadLibros;
 	int  auxiliarId = 0;
 	int idMaximo;
 	if(ll_isEmpty(pointerArrayListMovies) == 0 && pointerArrayListMovies != NULL){
 
-			printf("\n    ---------------- Modificación de un empleado ------------- \n");
+			printf("\n    ---------------- Modificación de un libro ------------- \n");
 
 
-				cantidadEmployees = ll_len(pointerArrayListMovies);
-				for(int i=0; i<cantidadEmployees ; i++){
+				cantidadLibros = ll_len(pointerArrayListMovies);
+				for(int i=0; i<cantidadLibros ; i++){
 					peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
-					movie_getId(peliculaAuxiliar, &idMaximo);
+					libro_getId(peliculaAuxiliar, &idMaximo);
 					if(  auxiliarId>idMaximo ){
 						idMaximo = auxiliarId;
 
@@ -101,15 +101,15 @@ int controller_editMovie(LinkedList* pointerArrayListMovies)
 				};
 
 
-				if(	utn_getNumero(&idEmployeeACambiar, "\nIngrese el id del Empleado a cambiar    ", "\nError, intente nuevamente",  -1, idMaximo, 3) == 0){
+				if(	utn_getNumero(&idLibroACambiar, "\nIngrese el id del libro a cambiar    ", "\nError, intente nuevamente",  -1, idMaximo, 3) == 0){
 
-					for (int i = 0; i < cantidadEmployees; i++) {
+					for (int i = 0; i < cantidadLibros; i++) {
 						peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
-						movie_getId(peliculaAuxiliar, &auxiliarId);
+						libro_getId(peliculaAuxiliar, &auxiliarId);
 
-						if (idEmployeeACambiar == auxiliarId) {
-							printf("\nEmpleado encontrado");
-							movie_printfOne(peliculaAuxiliar);
+						if (idLibroACambiar == auxiliarId) {
+							printf("\nlibro encontrado");
+							libro_printfOne(peliculaAuxiliar);
 							break;
 						}
 					}
@@ -118,26 +118,26 @@ int controller_editMovie(LinkedList* pointerArrayListMovies)
 
 						switch (datoACambiar) {
 							case 1:
-								if (  (utn_getString(auxiliarNombre,"\n Ingrese el nombre  ", "\n Error intente nuevamente  ", 3) == 0) &&
-									  (movie_setTitulo(peliculaAuxiliar, auxiliarNombre) == 0) ){
+								if (  (utn_getString(auxiliarTitulo,"\n Ingrese el nombre  ", "\n Error intente nuevamente  ", 3) == 0) &&
+									  (libro_setTitulo(peliculaAuxiliar, auxiliarTitulo) == 0) ){
 											printf("\n DATOS NUEVOS-------------------------------- \n");
-											movie_printfOne(peliculaAuxiliar);
+											libro_printfOne(peliculaAuxiliar);
 											retorno=0;
 								}
 								break;
 							case 2:
-								if (  (utn_getString(auxiliarHorasTrabajadas,"\n Ingrese las horas trabajadas  ", "\n Error, intente nuevamente",3) == 0) &&
-									  (movie_setAutor(peliculaAuxiliar, auxiliarHorasTrabajadas) == 0) ){
+								if (  (utn_getString(auxiliarAutor,"\n Ingrese las horas trabajadas  ", "\n Error, intente nuevamente",3) == 0) &&
+									  (libro_setAutor(peliculaAuxiliar, auxiliarAutor) == 0) ){
 											printf("\n DATOS NUEVOS-------------------------------- \n");
-											movie_printfOne(peliculaAuxiliar);
+											libro_printfOne(peliculaAuxiliar);
 											retorno=0;
 								}
 								break;
 							case 3:
-								if (  (utn_getNumero(&auxiliarSueldo,"\n Ingrese el sueldo  ", "\n Error, intente nuevamente", 1, 90000,3) == 0) &&
-									  (movie_setPrecio(peliculaAuxiliar, auxiliarSueldo) == 0) ){
+								if (  (utn_getNumero(&auxiliarPrecio,"\n Ingrese el sueldo  ", "\n Error, intente nuevamente", 1, 90000,3) == 0) &&
+									  (libro_setPrecio(peliculaAuxiliar, auxiliarPrecio) == 0) ){
 											printf("\n DATOS NUEVOS-------------------------------- \n");
-											movie_printfOne(peliculaAuxiliar);
+											libro_printfOne(peliculaAuxiliar);
 											retorno=0;
 								}
 							break;
@@ -152,7 +152,7 @@ int controller_editMovie(LinkedList* pointerArrayListMovies)
 				}
 
 	}else{
-		printf("No hay empleados cargados");
+		printf("No hay libros cargados");
 
 	}
 
@@ -160,53 +160,53 @@ int controller_editMovie(LinkedList* pointerArrayListMovies)
 }
 
 
-int controller_removeMovie(LinkedList* pointerArrayListMovies)
+int controller_removeLibro(LinkedList* pointerArrayListMovies)
 {
 
 	int retorno = -1;
 	Libro *peliculaAuxiliar = NULL;
 	int  auxiliarId = 0;
 	char validacion;
-	int idEmployeeACambiar;
-	int cantidadEmployees;
+	int idLibroACambiar;
+	int cantidadLibros;
 	int idMaximo;
 
-	int indexEmployee;
+	int indexLibro;
 	if(ll_isEmpty(pointerArrayListMovies) == 0 && pointerArrayListMovies != NULL){
 
-			printf("\n    ---------------- Baja de un empleado ------------- \n");
+			printf("\n    ---------------- Baja de un libro ------------- \n");
 
 
-				cantidadEmployees = ll_len(pointerArrayListMovies);
-				for(int i=0; i<cantidadEmployees ; i++){
+				cantidadLibros = ll_len(pointerArrayListMovies);
+				for(int i=0; i<cantidadLibros ; i++){
 					peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
-					movie_getId(peliculaAuxiliar, &idMaximo);
+					libro_getId(peliculaAuxiliar, &idMaximo);
 					if(  auxiliarId>idMaximo ){
 						idMaximo = auxiliarId;
 					};
 				};
 
 
-				if(	utn_getNumero(&idEmployeeACambiar, "\nIngrese el id del Empleado a dar de baja  ", "\nError, intente nuevamente",  -1, idMaximo, 3) == 0){
+				if(	utn_getNumero(&idLibroACambiar, "\nIngrese el id del libro a dar de baja  ", "\nError, intente nuevamente",  -1, idMaximo, 3) == 0){
 
-					for (int i = 0; i < cantidadEmployees; i++) {
+					for (int i = 0; i < cantidadLibros; i++) {
 						peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
-						movie_getId(peliculaAuxiliar, &auxiliarId);
+						libro_getId(peliculaAuxiliar, &auxiliarId);
 
-						if (idEmployeeACambiar == auxiliarId) {
-							printf("\nEmpleado encontrado");
-							movie_printfOne(peliculaAuxiliar);
-							indexEmployee =  ll_indexOf(pointerArrayListMovies, peliculaAuxiliar);
+						if (idLibroACambiar == auxiliarId) {
+							printf("\nlibro encontrado");
+							libro_printfOne(peliculaAuxiliar);
+							indexLibro =  ll_indexOf(pointerArrayListMovies, peliculaAuxiliar);
 							break;
 						}
 
 					}
-							utn_getCharAceptar(&validacion, "\n¿Está seguro que desea borrar este empleado?  ('s' o 'n')        ", "\n Error, ingrese nuevamente", 3);
+							utn_getCharAceptar(&validacion, "\n¿Está seguro que desea borrar este libro?  ('s' o 'n')        ", "\n Error, ingrese nuevamente", 3);
 							switch (validacion) {
 
 								case 's':
-									ll_remove(pointerArrayListMovies, indexEmployee);
-									printf("\n Empleado eliminado");
+									ll_remove(pointerArrayListMovies, indexLibro);
+									printf("\n libro eliminado");
 								break;
 								case 'n':
 									printf("\n Operación cancelada");
@@ -217,49 +217,50 @@ int controller_removeMovie(LinkedList* pointerArrayListMovies)
 				}
 
 	}else{
-		printf("No hay empleados cargados");
+		printf("No hay libros cargados");
 
 	}
 
 	return retorno;
 }
 
-int controller_ListMovie(LinkedList* pointerArrayListMovies){
+int controller_ListLibro(LinkedList* pointerArrayListMovies){
 	int retorno = -1;
 	int  auxiliarId;
-	char auxiliarNombre[200];
-	char auxiliarHorario[20];
-	int auxiliarSala;
-	//int auxiliarEntradas;
+	char auxiliarTitulo[150];
+	char auxiliarAutor[150];
+	char auxiliarEditorialTexto[300];
+	int auxiliarPrecio;
+	int auxiliarIdEditorial;
 
 
 
+	int lenghtLibros = ll_len(pointerArrayListMovies);
+	if (pointerArrayListMovies != NULL && lenghtLibros > 0){
+		printf("\n           ********************************************  LIBROS ********************************************* ");
 
-	int lenghtEmployees = ll_len(pointerArrayListMovies);
-	if (pointerArrayListMovies != NULL && lenghtEmployees > 0){
-		printf("\n  ****************  DATOS PERSONALES DE EMPLEADOS  ***************** ");
 
-
-		for(int i = 0; i < lenghtEmployees; i++ ){
+		for(int i = 0; i < lenghtLibros; i++ ){
 			Libro*  peliculaAuxiliar= ll_get(pointerArrayListMovies, i);
 
-			movie_getId( peliculaAuxiliar, &auxiliarId);
-			movie_getTitulo(peliculaAuxiliar, auxiliarHorario);
-			movie_getAutor(peliculaAuxiliar, auxiliarNombre);
-			movie_getPrecio(peliculaAuxiliar, &auxiliarSala);
-		//	movie_getEditorialId(peliculaAuxiliar, &auxiliarEntradas);
+			libro_getId( peliculaAuxiliar, &auxiliarId);
+			libro_getTitulo(peliculaAuxiliar, auxiliarTitulo);
+			libro_getAutor(peliculaAuxiliar, auxiliarAutor);
+			libro_getPrecio(peliculaAuxiliar, &auxiliarPrecio);
+			libro_getEditorialId(peliculaAuxiliar, &auxiliarIdEditorial);
+			idAEditorial(auxiliarIdEditorial, auxiliarEditorialTexto);
 
-
-			printf("\n Id %d.  Titulo: %s,      Autor: %s,         Precio: %d      ",
+			printf("\n Id %2d.  Titulo: %-50s |   Autor: %-15s |   Precio: %8d |   Editorial: %s  ",
 																	   auxiliarId,
-																	   auxiliarNombre,
-																	   auxiliarHorario,
-																	   auxiliarSala
+																	   auxiliarTitulo,
+																	   auxiliarAutor,
+																	   auxiliarPrecio,
+																	   auxiliarEditorialTexto
 																	   );
 		};
 		retorno = 0;
 	}else{
-		printf("No hay empleados cargados");
+		printf("No hay libros cargados");
 
 	}
 
@@ -268,47 +269,53 @@ int controller_ListMovie(LinkedList* pointerArrayListMovies){
 }
 
 
-int controller_sortMovie(LinkedList* pointerArrayListMovies)
+int controller_sortLibro(LinkedList* pointerArrayListMovies)
 {
 		int retorno = -1;
 		int(*funcionTipoOrden)(void*,void*);
 		int tipodeSort;
 
 
-		int lenghtEmployees = ll_len(pointerArrayListMovies);
-		if (pointerArrayListMovies != NULL && lenghtEmployees > 0){
+		int lenghtLibros = ll_len(pointerArrayListMovies);
+		if (pointerArrayListMovies != NULL && lenghtLibros > 0){
 
 
 
 			utn_getNumero(&tipodeSort, "\n Ingrese una opcion del 1 al 8 "
-					"\n1- Ordenar ID de forma ascendente "
-					"\n2- Ordenar ID de forma descendente "
-					"\n3- Ordenar Autor de forma ascendente "
-					"\n4- Ordenar Autor de forma descendente "
-					"\n5- Ordenar Titulo de forma ascendente "
-					"\n6- Ordenar Titulo de forma descendente "
-					"\n7- Ordenar Precio de forma ascendente "
-					"\n8- Ordenar Precio de forma descendente "
-					"\n9-  Volver al menú principal        ", "\n Error, ingrese nuevamente", 1, 9, 3);
+					"\n 1- Ordenar ID de forma ascendente "
+					"\n 2- Ordenar ID de forma descendente "
+					"\n 3- Ordenar Autor de A - Z "
+					"\n 4- Ordenar Autor de Z - A "
+					"\n 5- Ordenar Titulo de A - Z "
+					"\n 6- Ordenar Titulo de Z - A "
+					"\n 7- Ordenar Precio de forma ascendente "
+					"\n 8- Ordenar Precio de forma descendente "
+					"\n 9- Ordenar Editorial de A - Z "
+					"\n10- Ordenar Editorial de Z - A "
+					"\n11-  Volver al menú principal        ", "\n Error, ingrese nuevamente ", 1, 11, 3);
 
 					switch (tipodeSort) {
 						case 1:
 						case 2:
-							funcionTipoOrden = movie_sortID;
+							funcionTipoOrden = libro_sortID;
 							break;
 						case 3:
 						case 4:
-							funcionTipoOrden = movie_sortAutor;
+							funcionTipoOrden = libro_sortAutor;
 							break;
 						case 5:
 						case 6:
-							funcionTipoOrden = movie_sortTitulo;
+							funcionTipoOrden = libro_sortTitulo;
 							break;
 						case 7:
 						case 8:
-							funcionTipoOrden = movie_sortPrecio;
+							funcionTipoOrden = libro_sortPrecio;
 							break;
 						case 9:
+						case 10:
+							funcionTipoOrden = libro_sortEditorial;
+							break;
+						case 11:
 							break;
 					}//Fin switch
 
@@ -320,7 +327,7 @@ int controller_sortMovie(LinkedList* pointerArrayListMovies)
 			printf("\n               ** Lista ordenada ** ");
 			retorno = 0;
 		}else{
-			printf("No hay empleados cargados");
+			printf("No hay libros cargados");
 
 		}
 
@@ -332,32 +339,32 @@ int controller_saveAsText(char* path , LinkedList* pointerArrayListMovies)
 {
 	int retorno = -1;
 	int  auxiliarId;
-	char auxiliarNombre[200];
-	char horario[20];
-	int auxiliarDia;
-	int auxiliarCantidad_entradas ;
+	char auxiliarTitulo[150];
+	char auxiliarAutor[150];
+	int auxiliarPrecio;
+	int auxiliarEditorialId ;
 
 
 	if(ll_isEmpty(pointerArrayListMovies) == 0){
 	FILE *pointerFile = fopen(path,"w");
 		if (path != NULL && pointerArrayListMovies != NULL && pointerFile != NULL){
-			fprintf( pointerFile,"id,    nombre,    dia,  horario,    sala,   cantidad de entradas,    monto\n");
+			fprintf( pointerFile,"Id,    Tiulo,    Autor,  Precio,   Editorial \n");
 			for(int i = 0; i < ll_len(pointerArrayListMovies); i++){
 
 				Libro  *peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
-				if(		movie_getId( peliculaAuxiliar, &auxiliarId) == 0 &&
-						movie_getTitulo(peliculaAuxiliar, auxiliarNombre) == 0 &&
-						movie_getAutor(peliculaAuxiliar, horario) == 0 &&
-						movie_getPrecio(peliculaAuxiliar, &auxiliarDia) == 0 &&
-						movie_getEditorialId(peliculaAuxiliar, &auxiliarCantidad_entradas) == 0
+				if(		libro_getId( peliculaAuxiliar, &auxiliarId) == 0 &&
+						libro_getTitulo(peliculaAuxiliar, auxiliarTitulo) == 0 &&
+						libro_getAutor(peliculaAuxiliar, auxiliarAutor) == 0 &&
+						libro_getPrecio(peliculaAuxiliar, &auxiliarPrecio) == 0 &&
+						libro_getEditorialId(peliculaAuxiliar, &auxiliarEditorialId) == 0
 					)
 				{
 				fprintf( pointerFile,"%d, %s, %s, %d,  %d\n",
 														 auxiliarId,
-														 auxiliarNombre,
-														 horario,
-														 auxiliarDia,
-														 auxiliarCantidad_entradas
+														 auxiliarTitulo,
+														 auxiliarAutor,
+														 auxiliarPrecio,
+														 auxiliarEditorialId
 														 );
 				}
 			}
@@ -386,9 +393,9 @@ int controller_saveAsBinary(char* path , LinkedList* pointerArrayListMovies)
 		if (path != NULL && pointerArrayListMovies != NULL){
 			FILE *pointerFile=fopen(path,"wb");
 
-			int lenghtEmployees = ll_len(pointerArrayListMovies);
+			int lenghtLibros = ll_len(pointerArrayListMovies);
 
-			for(int i = 0; i < lenghtEmployees; i++ ){
+			for(int i = 0; i < lenghtLibros; i++ ){
 
 				Libro*  peliculaAuxiliar= ll_get(pointerArrayListMovies, i);
 				if(pointerFile != NULL){
@@ -422,7 +429,7 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListMovies){
 
 			pointerFile = fopen(path,"r");
 
-			if( parser_EmployeeFromText(pointerFile, pointerArrayListMovies) == 0 )
+			if( parser_LibroFromText(pointerFile, pointerArrayListMovies) == 0 )
 			{
 				printf("\nArchivo leido y cerrado con éxito");
 				retorno = 0;
@@ -442,7 +449,7 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListMovies){
 					ll_clear(pointerArrayListMovies);
 					FILE *pointerFile=fopen(path,"r");
 
-					if(pointerFile != NULL && parser_EmployeeFromText(pointerFile, pointerArrayListMovies) == 0 )
+					if(pointerFile != NULL && parser_LibroFromText(pointerFile, pointerArrayListMovies) == 0 )
 					{
 						printf("\nArchivo nuevo leido y cerrado con éxito");
 						fclose(pointerFile);
@@ -456,7 +463,7 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListMovies){
 
 						FILE *pointerFile=fopen(path,"r");
 
-						if(pointerFile != NULL && parser_EmployeeFromText(pointerFile, pointerArrayListMovies) == 0 )
+						if(pointerFile != NULL && parser_LibroFromText(pointerFile, pointerArrayListMovies) == 0 )
 						{
 							printf("\nArchivo nuevo leido y cerrado con éxito");
 							fclose(pointerFile);
@@ -485,7 +492,7 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListMovies){
 	    			FILE *pointerFile=fopen(path,"rb");
 
 	    			if(pointerFile != NULL &&
-	    				parser_EmployeeFromBinary(pointerFile, pointerArrayListMovies) == 0 ){
+	    				parser_LibroFromBinary(pointerFile, pointerArrayListMovies) == 0 ){
 	    				printf("\nArchivo leido y cerrado con éxito");
 	    				retorno = 0;
 
@@ -505,7 +512,7 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListMovies){
 	    					FILE *pointerFile=fopen(path,"rb");
 
 	    					if(  pointerFile != NULL &&
-	    					     parser_EmployeeFromBinary(pointerFile, pointerArrayListMovies)  == 0  )
+	    					     parser_LibroFromBinary(pointerFile, pointerArrayListMovies)  == 0  )
 	    					{
 	    						printf("\nArchivo nuevo leido y cerrado con éxito");
 	    						fclose(pointerFile);
@@ -519,7 +526,7 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListMovies){
 								FILE *pointerFile=fopen(path,"rb");
 
 								if(  pointerFile != NULL &&
-									 parser_EmployeeFromBinary(pointerFile, pointerArrayListMovies)  == 0  )
+									 parser_LibroFromBinary(pointerFile, pointerArrayListMovies)  == 0  )
 								{
 									printf("\nArchivo nuevo leido y cerrado con éxito");
 									fclose(pointerFile);
@@ -536,14 +543,115 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListMovies){
 }
 
 
-int controller_Contador(LinkedList* pointerArrayListMovies){
-	int retorno = -1;
 
-	if (pointerArrayListMovies != NULL){}
+int controller_Contador(LinkedList* pointerArrayListMovies)
+{
+		int retorno = -1;
+		int (*funcion)(void* element);
+		int opcion;
+		int cantidad;
+
+		int lenghtLibros = ll_len(pointerArrayListMovies);
+		if (pointerArrayListMovies != NULL && lenghtLibros > 0){
 
 
-	return retorno;
+
+			utn_getNumero(&opcion, "\n Ingrese una opcion del 1 al 8 "
+					"\n 1- calcular Cantidad Editorial Planeta "
+					"\n 2-"
+					"\n 3- "
+					"\n 4- "
+					"\n 5-"
+					"\n 6- "
+					"\n 7-  Volver al menú principal        ", "\n Error, ingrese nuevamente ", 1, 7, 3);
+
+					switch (opcion) {
+						case 1:
+							funcion = calcularCantidadEditorialPlaneta;
+							break;
+						case 2:
+						case 3:
+						case 4:
+
+							break;
+						case 5:
+						case 6:
+
+
+						break;
+						case 7:
+
+								break;
+					}//Fin switch
+
+
+					cantidad = ll_count(pointerArrayListMovies, funcion);
+					printf("\n  cantidad de libro con editorial  el planeta %d",cantidad );
+
+
+			retorno = 0;
+		}else{
+			printf("No hay libros cargados");
+
+		}
+
+    return retorno;
 }
+
+
+
+int controller_filtro(LinkedList* pointerArrayListMovies)
+{
+		int retorno = -1;
+		int (*funcion)(void* element);
+		int opcion;
+
+		LinkedList* LinkedListNueva = NULL;
+
+		int lenghtLibros = ll_len(pointerArrayListMovies);
+		if (pointerArrayListMovies != NULL && lenghtLibros > 0){
+
+
+
+			utn_getNumero(&opcion, "\n Ingrese una opcion del 1 al 8 "
+					"\n 1- filtrar Editorial Planeta "
+					"\n 2-"
+					"\n 3- "
+					"\n 4- "
+					"\n 5-"
+					"\n 6- "
+					"\n 7-  Volver al menú principal        ", "\n Error, ingrese nuevamente ", 1, 7, 3);
+
+					switch (opcion) {
+						case 1:
+							funcion = filterPlaneta;
+							break;
+						case 2:
+						case 3:
+						case 4:
+						case 5:
+						case 6:
+						case 7:
+						break;
+					}//Fin switch
+
+
+					LinkedListNueva = ll_filter(pointerArrayListMovies, funcion);
+					if(LinkedListNueva != NULL){
+						controller_ListLibro(LinkedListNueva);
+					};
+
+
+			retorno = 0;
+		}else{
+			printf("No hay libros cargados");
+
+		}
+
+    return retorno;
+}
+
+
 
 
 /*
@@ -551,7 +659,7 @@ int controller_Informes(LinkedList* pointerArrayListMovies){
 	Pelicula *peliculaAuxiliar = NULL;
 	int retorno = -1;
 	int tipodeInforme;
-	int  auxiliarSala = 0;
+	int  auxiliarPrecio = 0;
 	int salaMaxima;
 
 	utn_getNumero(&tipodeInforme,
@@ -566,21 +674,21 @@ int controller_Informes(LinkedList* pointerArrayListMovies){
 
 			if(ll_isEmpty(pointerArrayListMovies) == 0 && pointerArrayListMovies != NULL){
 
-					printf("\n    ---------------- Modificación de un empleado ------------- \n");
+					printf("\n    ---------------- Modificación de un libro ------------- \n");
 
 
 
 						for(int i=0; i< ll_len(pointerArrayListMovies); i++){
 							peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
 							movie_getSala(peliculaAuxiliar, &salaMaxima);
-							if(  auxiliarSala>salaMaxima )
+							if(  auxiliarPrecio>salaMaxima )
 							{
-								salaMaxima = auxiliarSala;
+								salaMaxima = auxiliarPrecio;
 							};
 						};
 
 
-						if(	utn_getNumero(&idEmployeeACambiar, "\nIngrese el id del Empleado a cambiar    ", "\nError, intente nuevamente",  -1, idMaximo, 3) == 0){
+						if(	utn_getNumero(&idLibroACambiar, "\nIngrese el id del libro a cambiar    ", "\nError, intente nuevamente",  -1, idMaximo, 3) == 0){
 
 
 						}}
@@ -597,7 +705,7 @@ int controller_Informes(LinkedList* pointerArrayListMovies){
 				for(int i = 0; i < ll_len(pointerArrayListMovies); i++){
 
 								Pelicula  *peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
-								//movie_getSala(peliculaAuxiliar, &auxiliarSala)
+								//movie_getSala(peliculaAuxiliar, &auxiliarPrecio)
 				}
 
 

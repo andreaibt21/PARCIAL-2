@@ -2,13 +2,13 @@
  * parser.h
  *
  *  Created on: Jun 7, 2021
- *      Author: andre
+ *      Author: andrea
  */
 
 #ifndef PARSER_H_
 #define PARSER_H_
-int parser_EmployeeFromText(FILE* pFile , LinkedList* pointerArrayListEmployee);
-int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pointerArrayListEmployee);
+int parser_LibroFromText(FILE* pointerFile , LinkedList* pointerArrayListLibro);
+int parser_LibroFromBinary(FILE* pointerFile , LinkedList* pointerArrayListLibro);
 
 
 #endif /* PARSER_H_ */
