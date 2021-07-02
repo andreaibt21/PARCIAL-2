@@ -23,7 +23,7 @@ Libro* libro_new(){
 	}
 	return auxiliar;
 }
-                          //	int id; char titulo[300]; char autor[300]; int precio; int editorialId;
+                          //	int id; char titulo[150]; char autor[150]; int precio; int editorialId;
 
 Libro* libro_newParametros(char* idStr,char* tituloStr,char* autorStr,char* precioStr, char* editorialIdStr){
 	Libro* peliculaAuxiliar = libro_new();
@@ -40,8 +40,8 @@ Libro* libro_newParametros(char* idStr,char* tituloStr,char* autorStr,char* prec
 
 				}else{
 					peliculaAuxiliar=NULL;
-
 				}
+
 	}
 	return peliculaAuxiliar;
 }

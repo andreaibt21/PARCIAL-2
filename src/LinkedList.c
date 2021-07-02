@@ -231,7 +231,7 @@ int ll_remove(LinkedList *this, int index) {
 
 			}
 		}
-				//free del nodo que quieres borrar
+
 				free(auxNodeToRemove);
 				this->size--;    //disminuir el size
 				returnAux = 0;
@@ -446,7 +446,7 @@ int ll_remove(LinkedList *this, int index) {
 	 */
 	LinkedList* ll_subList(LinkedList *this, int from, int to) {
 		LinkedList *cloneArray = NULL;
-	//	Node *auxNode = NULL;
+
 
 		if(		this != NULL
 				&&  from >= 0

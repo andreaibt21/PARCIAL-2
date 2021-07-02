@@ -9,7 +9,7 @@
  * \return int
  *
  */
-int controller_addLibro(LinkedList* pointerArrayListMovies);
+int controller_addLibro(LinkedList* pointerArrayListLibros);
 
 /** \brief Modificar datos de empleado
  *
@@ -17,7 +17,7 @@ int controller_addLibro(LinkedList* pointerArrayListMovies);
  * \return int
  *
  */
-int controller_editLibro(LinkedList* pointerArrayListMovies);
+int controller_editLibro(LinkedList* pointerArrayListLibros);
 /** \brief Baja de empleado
  *
  * \param pointerArrayListEmployee LinkedList*
@@ -25,7 +25,7 @@ int controller_editLibro(LinkedList* pointerArrayListMovies);
  *
  */
 
-int controller_removeLibro(LinkedList* pointerArrayListMovies);
+int controller_removeLibro(LinkedList* pointerArrayListLibros);
 
 /** \brief Listar empleados
  *
@@ -33,14 +33,14 @@ int controller_removeLibro(LinkedList* pointerArrayListMovies);
  * \return int
  *
  */
-int controller_ListLibro(LinkedList* pointerArrayListMovies);
+int controller_ListLibro(LinkedList* pointerArrayListLibros);
 /** \brief Ordenar empleados
  *
  * \param pointerArrayListEmployee LinkedList*
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  *
  */
-int controller_sortLibro(LinkedList* pointerArrayListMovies);
+int controller_sortLibro(LinkedList* pointerArrayListLibros);
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
  *
@@ -48,7 +48,7 @@ int controller_sortLibro(LinkedList* pointerArrayListMovies);
  * \param pointerArrayListEmployee LinkedList*
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  */
-int controller_saveAsText(char* path , LinkedList* pointerArrayListMovies);
+int controller_saveAsText(char* path , LinkedList* pointerArrayListLibros);
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
  *
  * \param path char* el archivo
@@ -56,7 +56,7 @@ int controller_saveAsText(char* path , LinkedList* pointerArrayListMovies);
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  *
  */
-int controller_saveAsBinary(char* path , LinkedList* pointerArrayListMovies);
+int controller_saveAsBinary(char* path , LinkedList* pointerArrayListLibros);
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  *
@@ -65,7 +65,7 @@ int controller_saveAsBinary(char* path , LinkedList* pointerArrayListMovies);
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  *
  */
-int controller_loadFromText(char* path , LinkedList* pointerArrayListMovies);
+int controller_loadFromText(char* path , LinkedList* pointerArrayListLibros);
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
  *
@@ -74,9 +74,9 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListMovies);
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  *
  */
-int controller_loadFromBinary(char* path , LinkedList* pointerArrayListMovies);
+int controller_loadFromBinary(char* path , LinkedList* pointerArrayListLibros);
 
-int controller_filtro(LinkedList* pointerArrayListMovies);
+int controller_filtro(LinkedList* pointerArrayListLibros);
 
-int controller_Contador(LinkedList* pointerArrayListMovies);
+int controller_Contador(LinkedList* pointerArrayListLibros);
 

@@ -91,7 +91,9 @@ int main()
 }
 
 /**
- * case 2:
+	char archivo[20];
+
+  case 2:
 				if( utn_getString(archivo,  "\n Ingrese el nombre del archivo a leer   (datos.csv) ",	"Error, intente de nuevo", 3) == 0 &&
 					controller_loadFromText(archivo,listaLibros)  != 0){
 

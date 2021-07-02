@@ -10,7 +10,7 @@
 #include "utn.h"
 
 
-int controller_addLibro(LinkedList* pointerArrayListMovies){
+int controller_addLibro(LinkedList* pointerArrayListLibros){
 
 	int retorno = -1;
     Libro *peliculaAuxiliar = NULL;
@@ -22,7 +22,7 @@ int controller_addLibro(LinkedList* pointerArrayListMovies){
 	int cantidadLibros;
 	int auxiliarEditorialId;
 
-    		if (pointerArrayListMovies != NULL){
+    		if (pointerArrayListLibros != NULL){
 
 
     				printf("\n    ---------------- Alta de un libro nuevo ------------- \n");
@@ -31,13 +31,13 @@ int controller_addLibro(LinkedList* pointerArrayListMovies){
 					      (utn_getNumero(&auxiliarPrecio,"\n Ingrese el precio (Entre 1 y 90000) ", "\n Error, intente nuevamente", 1, 90000,3) == 0) &&
 					      (utn_getNumero(&auxiliarEditorialId,"\n Ingrese el id de la editorial: \n1 - PLANETA \n2 - SIGLO XXI EDITORES \n3 - PEARSON\n4 - MINOTAURO\n5 - SALAMANDRA \n6 - PENGUIN BOOKS                ", "\n Error, intente nuevamente", 1, 6,3) == 0)
 				       ){
-    					if( ll_isEmpty(pointerArrayListMovies) == 0){
+    					if( ll_isEmpty(pointerArrayListLibros) == 0){
 
-    						cantidadLibros = ll_len(pointerArrayListMovies);
+    						cantidadLibros = ll_len(pointerArrayListLibros);
 
 							for(int i=0; i<cantidadLibros ; i++){
 
-								peliculaAuxiliar =ll_get(pointerArrayListMovies, i);
+								peliculaAuxiliar =ll_get(pointerArrayListLibros, i);
 								libro_getId(peliculaAuxiliar, &idMaximo);
 
 								if(  auxiliarId>idMaximo ){
@@ -57,7 +57,7 @@ int controller_addLibro(LinkedList* pointerArrayListMovies){
 							  (libro_setEditorialId(peliculaAuxiliar, auxiliarEditorialId) == 0)
 
     					){
-    						ll_add(pointerArrayListMovies, peliculaAuxiliar);
+    						ll_add(pointerArrayListLibros, peliculaAuxiliar);
 							printf("\nEl libro cargado es: \n");
 							libro_printfOne(peliculaAuxiliar);
 							retorno=0;
@@ -71,7 +71,7 @@ int controller_addLibro(LinkedList* pointerArrayListMovies){
 }
 
 
-int controller_editLibro(LinkedList* pointerArrayListMovies)
+int controller_editLibro(LinkedList* pointerArrayListLibros)
 {
 
 	int retorno = -1;
@@ -84,14 +84,14 @@ int controller_editLibro(LinkedList* pointerArrayListMovies)
 	int cantidadLibros;
 	int  auxiliarId = 0;
 	int idMaximo;
-	if(ll_isEmpty(pointerArrayListMovies) == 0 && pointerArrayListMovies != NULL){
+	if(ll_isEmpty(pointerArrayListLibros) == 0 && pointerArrayListLibros != NULL){
 
 			printf("\n    ---------------- Modificación de un libro ------------- \n");
 
 
-				cantidadLibros = ll_len(pointerArrayListMovies);
+				cantidadLibros = ll_len(pointerArrayListLibros);
 				for(int i=0; i<cantidadLibros ; i++){
-					peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
+					peliculaAuxiliar = ll_get(pointerArrayListLibros, i);
 					libro_getId(peliculaAuxiliar, &idMaximo);
 					if(  auxiliarId>idMaximo ){
 						idMaximo = auxiliarId;
@@ -104,7 +104,7 @@ int controller_editLibro(LinkedList* pointerArrayListMovies)
 				if(	utn_getNumero(&idLibroACambiar, "\nIngrese el id del libro a cambiar    ", "\nError, intente nuevamente",  -1, idMaximo, 3) == 0){
 
 					for (int i = 0; i < cantidadLibros; i++) {
-						peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
+						peliculaAuxiliar = ll_get(pointerArrayListLibros, i);
 						libro_getId(peliculaAuxiliar, &auxiliarId);
 
 						if (idLibroACambiar == auxiliarId) {
@@ -160,7 +160,7 @@ int controller_editLibro(LinkedList* pointerArrayListMovies)
 }
 
 
-int controller_removeLibro(LinkedList* pointerArrayListMovies)
+int controller_removeLibro(LinkedList* pointerArrayListLibros)
 {
 
 	int retorno = -1;
@@ -172,14 +172,14 @@ int controller_removeLibro(LinkedList* pointerArrayListMovies)
 	int idMaximo;
 
 	int indexLibro;
-	if(ll_isEmpty(pointerArrayListMovies) == 0 && pointerArrayListMovies != NULL){
+	if(ll_isEmpty(pointerArrayListLibros) == 0 && pointerArrayListLibros != NULL){
 
 			printf("\n    ---------------- Baja de un libro ------------- \n");
 
 
-				cantidadLibros = ll_len(pointerArrayListMovies);
+				cantidadLibros = ll_len(pointerArrayListLibros);
 				for(int i=0; i<cantidadLibros ; i++){
-					peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
+					peliculaAuxiliar = ll_get(pointerArrayListLibros, i);
 					libro_getId(peliculaAuxiliar, &idMaximo);
 					if(  auxiliarId>idMaximo ){
 						idMaximo = auxiliarId;
@@ -190,13 +190,13 @@ int controller_removeLibro(LinkedList* pointerArrayListMovies)
 				if(	utn_getNumero(&idLibroACambiar, "\nIngrese el id del libro a dar de baja  ", "\nError, intente nuevamente",  -1, idMaximo, 3) == 0){
 
 					for (int i = 0; i < cantidadLibros; i++) {
-						peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
+						peliculaAuxiliar = ll_get(pointerArrayListLibros, i);
 						libro_getId(peliculaAuxiliar, &auxiliarId);
 
 						if (idLibroACambiar == auxiliarId) {
 							printf("\nlibro encontrado");
 							libro_printfOne(peliculaAuxiliar);
-							indexLibro =  ll_indexOf(pointerArrayListMovies, peliculaAuxiliar);
+							indexLibro =  ll_indexOf(pointerArrayListLibros, peliculaAuxiliar);
 							break;
 						}
 
@@ -205,7 +205,7 @@ int controller_removeLibro(LinkedList* pointerArrayListMovies)
 							switch (validacion) {
 
 								case 's':
-									ll_remove(pointerArrayListMovies, indexLibro);
+									ll_remove(pointerArrayListLibros, indexLibro);
 									printf("\n libro eliminado");
 								break;
 								case 'n':
@@ -224,7 +224,7 @@ int controller_removeLibro(LinkedList* pointerArrayListMovies)
 	return retorno;
 }
 
-int controller_ListLibro(LinkedList* pointerArrayListMovies){
+int controller_ListLibro(LinkedList* pointerArrayListLibros){
 	int retorno = -1;
 	int  auxiliarId;
 	char auxiliarTitulo[150];
@@ -235,13 +235,13 @@ int controller_ListLibro(LinkedList* pointerArrayListMovies){
 
 
 
-	int lenghtLibros = ll_len(pointerArrayListMovies);
-	if (pointerArrayListMovies != NULL && lenghtLibros > 0){
+	int lenghtLibros = ll_len(pointerArrayListLibros);
+	if (pointerArrayListLibros != NULL && lenghtLibros > 0){
 		printf("\n           ********************************************  LIBROS ********************************************* ");
 
 
 		for(int i = 0; i < lenghtLibros; i++ ){
-			Libro*  peliculaAuxiliar= ll_get(pointerArrayListMovies, i);
+			Libro*  peliculaAuxiliar= ll_get(pointerArrayListLibros, i);
 
 			libro_getId( peliculaAuxiliar, &auxiliarId);
 			libro_getTitulo(peliculaAuxiliar, auxiliarTitulo);
@@ -269,15 +269,15 @@ int controller_ListLibro(LinkedList* pointerArrayListMovies){
 }
 
 
-int controller_sortLibro(LinkedList* pointerArrayListMovies)
+int controller_sortLibro(LinkedList* pointerArrayListLibros)
 {
 		int retorno = -1;
 		int(*funcionTipoOrden)(void*,void*);
 		int tipodeSort;
 
 
-		int lenghtLibros = ll_len(pointerArrayListMovies);
-		if (pointerArrayListMovies != NULL && lenghtLibros > 0){
+		int lenghtLibros = ll_len(pointerArrayListLibros);
+		if (pointerArrayListLibros != NULL && lenghtLibros > 0){
 
 
 
@@ -320,9 +320,9 @@ int controller_sortLibro(LinkedList* pointerArrayListMovies)
 					}//Fin switch
 
 			if(tipodeSort % 2 != 0){
-				ll_sort(pointerArrayListMovies, funcionTipoOrden, 1);
+				ll_sort(pointerArrayListLibros, funcionTipoOrden, 1);
 			}else{
-				ll_sort(pointerArrayListMovies, funcionTipoOrden, 0);
+				ll_sort(pointerArrayListLibros, funcionTipoOrden, 0);
 			}
 			printf("\n               ** Lista ordenada ** ");
 			retorno = 0;
@@ -335,7 +335,7 @@ int controller_sortLibro(LinkedList* pointerArrayListMovies)
 }
 
 
-int controller_saveAsText(char* path , LinkedList* pointerArrayListMovies)
+int controller_saveAsText(char* path , LinkedList* pointerArrayListLibros)
 {
 	int retorno = -1;
 	int  auxiliarId;
@@ -345,13 +345,13 @@ int controller_saveAsText(char* path , LinkedList* pointerArrayListMovies)
 	int auxiliarEditorialId ;
 
 
-	if(ll_isEmpty(pointerArrayListMovies) == 0){
+	if(ll_isEmpty(pointerArrayListLibros) == 0){
 	FILE *pointerFile = fopen(path,"w");
-		if (path != NULL && pointerArrayListMovies != NULL && pointerFile != NULL){
+		if (path != NULL && pointerArrayListLibros != NULL && pointerFile != NULL){
 			fprintf( pointerFile,"Id,    Tiulo,    Autor,  Precio,   Editorial \n");
-			for(int i = 0; i < ll_len(pointerArrayListMovies); i++){
+			for(int i = 0; i < ll_len(pointerArrayListLibros); i++){
 
-				Libro  *peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
+				Libro  *peliculaAuxiliar = ll_get(pointerArrayListLibros, i);
 				if(		libro_getId( peliculaAuxiliar, &auxiliarId) == 0 &&
 						libro_getTitulo(peliculaAuxiliar, auxiliarTitulo) == 0 &&
 						libro_getAutor(peliculaAuxiliar, auxiliarAutor) == 0 &&
@@ -384,20 +384,20 @@ int controller_saveAsText(char* path , LinkedList* pointerArrayListMovies)
 }
 
 
-int controller_saveAsBinary(char* path , LinkedList* pointerArrayListMovies)
+int controller_saveAsBinary(char* path , LinkedList* pointerArrayListLibros)
 {
 	int retorno = -1;
 	int cantidadEscrita;
 
-	if(ll_isEmpty(pointerArrayListMovies) == 0){
-		if (path != NULL && pointerArrayListMovies != NULL){
+	if(ll_isEmpty(pointerArrayListLibros) == 0){
+		if (path != NULL && pointerArrayListLibros != NULL){
 			FILE *pointerFile=fopen(path,"wb");
 
-			int lenghtLibros = ll_len(pointerArrayListMovies);
+			int lenghtLibros = ll_len(pointerArrayListLibros);
 
 			for(int i = 0; i < lenghtLibros; i++ ){
 
-				Libro*  peliculaAuxiliar= ll_get(pointerArrayListMovies, i);
+				Libro*  peliculaAuxiliar= ll_get(pointerArrayListLibros, i);
 				if(pointerFile != NULL){
 					cantidadEscrita = fwrite(peliculaAuxiliar, sizeof(Libro),1, pointerFile);
 				};
@@ -418,18 +418,18 @@ int controller_saveAsBinary(char* path , LinkedList* pointerArrayListMovies)
 }
 
 
-int controller_loadFromText(char* path , LinkedList* pointerArrayListMovies){
+int controller_loadFromText(char* path , LinkedList* pointerArrayListLibros){
 
 	int retorno = -1;
 	char validacion = 's';
 	FILE *pointerFile = NULL;
-	if (path != NULL && pointerArrayListMovies != NULL){
+	if (path != NULL && pointerArrayListLibros != NULL){
 
-		if(ll_isEmpty (pointerArrayListMovies ) == 1){
+		if(ll_isEmpty (pointerArrayListLibros ) == 1){
 
 			pointerFile = fopen(path,"r");
 
-			if( parser_LibroFromText(pointerFile, pointerArrayListMovies) == 0 )
+			if( parser_LibroFromText(pointerFile, pointerArrayListLibros) == 0 )
 			{
 				printf("\nArchivo leido y cerrado con éxito");
 				retorno = 0;
@@ -446,10 +446,10 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListMovies){
 			{
 				case 'n':
 					printf("\nSe han borrado los datos cargados anteriormente.  ");
-					ll_clear(pointerArrayListMovies);
+					ll_clear(pointerArrayListLibros);
 					FILE *pointerFile=fopen(path,"r");
 
-					if(pointerFile != NULL && parser_LibroFromText(pointerFile, pointerArrayListMovies) == 0 )
+					if(pointerFile != NULL && parser_LibroFromText(pointerFile, pointerArrayListLibros) == 0 )
 					{
 						printf("\nArchivo nuevo leido y cerrado con éxito");
 						fclose(pointerFile);
@@ -457,13 +457,13 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListMovies){
 					}
 				break;
 				case 's':
-					if(controller_saveAsText( "respaldo.csv", pointerArrayListMovies) == 0){
+					if(controller_saveAsText( "respaldo.csv", pointerArrayListLibros) == 0){
 
-						ll_clear(pointerArrayListMovies);
+						ll_clear(pointerArrayListLibros);
 
 						FILE *pointerFile=fopen(path,"r");
 
-						if(pointerFile != NULL && parser_LibroFromText(pointerFile, pointerArrayListMovies) == 0 )
+						if(pointerFile != NULL && parser_LibroFromText(pointerFile, pointerArrayListLibros) == 0 )
 						{
 							printf("\nArchivo nuevo leido y cerrado con éxito");
 							fclose(pointerFile);
@@ -480,19 +480,19 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListMovies){
 }
 
 
-int controller_loadFromBinary(char* path , LinkedList* pointerArrayListMovies){
+int controller_loadFromBinary(char* path , LinkedList* pointerArrayListLibros){
 
 	    int retorno = -1;
 	    	char validacion = 's';
-	    	if (path != NULL && pointerArrayListMovies != NULL){
+	    	if (path != NULL && pointerArrayListLibros != NULL){
 
 
-	    		if(ll_isEmpty (pointerArrayListMovies ) == 1){
+	    		if(ll_isEmpty (pointerArrayListLibros ) == 1){
 
 	    			FILE *pointerFile=fopen(path,"rb");
 
 	    			if(pointerFile != NULL &&
-	    				parser_LibroFromBinary(pointerFile, pointerArrayListMovies) == 0 ){
+	    				parser_LibroFromBinary(pointerFile, pointerArrayListLibros) == 0 ){
 	    				printf("\nArchivo leido y cerrado con éxito");
 	    				retorno = 0;
 
@@ -508,11 +508,11 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListMovies){
 	    			{
 	    				case 'n':
 	    					printf("\nSe han borrado los datos cargados anteriormente.  ");
-	    					ll_clear(pointerArrayListMovies);
+	    					ll_clear(pointerArrayListLibros);
 	    					FILE *pointerFile=fopen(path,"rb");
 
 	    					if(  pointerFile != NULL &&
-	    					     parser_LibroFromBinary(pointerFile, pointerArrayListMovies)  == 0  )
+	    					     parser_LibroFromBinary(pointerFile, pointerArrayListLibros)  == 0  )
 	    					{
 	    						printf("\nArchivo nuevo leido y cerrado con éxito");
 	    						fclose(pointerFile);
@@ -520,13 +520,13 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListMovies){
 	    					}
 	    				break;
 	    				case 's':
-	    					if ( controller_saveAsBinary("respaldo.bin",pointerArrayListMovies) == 0 )
+	    					if ( controller_saveAsBinary("respaldo.bin",pointerArrayListLibros) == 0 )
 	    					{
-								ll_clear(pointerArrayListMovies);
+								ll_clear(pointerArrayListLibros);
 								FILE *pointerFile=fopen(path,"rb");
 
 								if(  pointerFile != NULL &&
-									 parser_LibroFromBinary(pointerFile, pointerArrayListMovies)  == 0  )
+									 parser_LibroFromBinary(pointerFile, pointerArrayListLibros)  == 0  )
 								{
 									printf("\nArchivo nuevo leido y cerrado con éxito");
 									fclose(pointerFile);
@@ -544,15 +544,15 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListMovies){
 
 
 
-int controller_Contador(LinkedList* pointerArrayListMovies)
+int controller_Contador(LinkedList* pointerArrayListLibros)
 {
 		int retorno = -1;
 		int (*funcion)(void* element);
 		int opcion;
 		int cantidad;
 
-		int lenghtLibros = ll_len(pointerArrayListMovies);
-		if (pointerArrayListMovies != NULL && lenghtLibros > 0){
+		int lenghtLibros = ll_len(pointerArrayListLibros);
+		if (pointerArrayListLibros != NULL && lenghtLibros > 0){
 
 
 
@@ -585,7 +585,7 @@ int controller_Contador(LinkedList* pointerArrayListMovies)
 					}//Fin switch
 
 
-					cantidad = ll_count(pointerArrayListMovies, funcion);
+					cantidad = ll_count(pointerArrayListLibros, funcion);
 					printf("\n  cantidad de libro con editorial  el planeta %d",cantidad );
 
 
@@ -600,7 +600,7 @@ int controller_Contador(LinkedList* pointerArrayListMovies)
 
 
 
-int controller_filtro(LinkedList* pointerArrayListMovies)
+int controller_filtro(LinkedList* pointerArrayListLibros)
 {
 		int retorno = -1;
 		int (*funcion)(void* element);
@@ -608,8 +608,8 @@ int controller_filtro(LinkedList* pointerArrayListMovies)
 
 		LinkedList* LinkedListNueva = NULL;
 
-		int lenghtLibros = ll_len(pointerArrayListMovies);
-		if (pointerArrayListMovies != NULL && lenghtLibros > 0){
+		int lenghtLibros = ll_len(pointerArrayListLibros);
+		if (pointerArrayListLibros != NULL && lenghtLibros > 0){
 
 
 
@@ -636,7 +636,7 @@ int controller_filtro(LinkedList* pointerArrayListMovies)
 					}//Fin switch
 
 
-					LinkedListNueva = ll_filter(pointerArrayListMovies, funcion);
+					LinkedListNueva = ll_filter(pointerArrayListLibros, funcion);
 					if(LinkedListNueva != NULL){
 						controller_ListLibro(LinkedListNueva);
 					};
@@ -655,7 +655,7 @@ int controller_filtro(LinkedList* pointerArrayListMovies)
 
 
 /*
-int controller_Informes(LinkedList* pointerArrayListMovies){
+int controller_Informes(LinkedList* pointerArrayListLibros){
 	Pelicula *peliculaAuxiliar = NULL;
 	int retorno = -1;
 	int tipodeInforme;
@@ -669,17 +669,17 @@ int controller_Informes(LinkedList* pointerArrayListMovies){
 			"\n | 3- Listado de películas que se proyectaron en dicha sala  "
 			"\n | 4-  Volver al menú principal    \n |    ", "\n Error, ingrese nuevamente", 1, 5, 3);
 
-	if (pointerArrayListMovies != NULL && ll_isEmpty(pointerArrayListMovies == 0)){
+	if (pointerArrayListLibros != NULL && ll_isEmpty(pointerArrayListLibros == 0)){
 
 
-			if(ll_isEmpty(pointerArrayListMovies) == 0 && pointerArrayListMovies != NULL){
+			if(ll_isEmpty(pointerArrayListLibros) == 0 && pointerArrayListLibros != NULL){
 
 					printf("\n    ---------------- Modificación de un libro ------------- \n");
 
 
 
-						for(int i=0; i< ll_len(pointerArrayListMovies); i++){
-							peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
+						for(int i=0; i< ll_len(pointerArrayListLibros); i++){
+							peliculaAuxiliar = ll_get(pointerArrayListLibros, i);
 							movie_getSala(peliculaAuxiliar, &salaMaxima);
 							if(  auxiliarPrecio>salaMaxima )
 							{
@@ -702,9 +702,9 @@ int controller_Informes(LinkedList* pointerArrayListMovies){
 
 				utn_getNumero(&tipodeInforme,
 							"\n Ingrese el numero de sala", "\n Error, ingrese nuevamente", 1, 5, 3);
-				for(int i = 0; i < ll_len(pointerArrayListMovies); i++){
+				for(int i = 0; i < ll_len(pointerArrayListLibros); i++){
 
-								Pelicula  *peliculaAuxiliar = ll_get(pointerArrayListMovies, i);
+								Pelicula  *peliculaAuxiliar = ll_get(pointerArrayListLibros, i);
 								//movie_getSala(peliculaAuxiliar, &auxiliarPrecio)
 				}
 

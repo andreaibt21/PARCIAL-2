@@ -30,13 +30,12 @@ Libro* libro_new();
 /** \brief Crea un empleado nuevo y lo devuelve por retorno
  *
  * \param char* idStr id del libro
- * \param char* nombreStr nombre del libro
- * \param char* AutorStr horas de trabajo del libro
+ * \param char* tituloStr nombre del libro
+ * \param char* autorStr autor del libro
+ * \param char* precioStr autor del libro
  * \param char* EditorialStr Editorial del libro
  * \return Retorna un empleado nuevo
  */
-
-
 Libro* libro_newParametros(char* idStr,char* tituloStr,char* autorStr,char* precioStr, char* editorialIdStr);
 
 
